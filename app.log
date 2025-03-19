@@ -1,0 +1,12 @@
+[2025-03-19 14:06:02] [INFO] User back created
+[2025-03-19 14:06:20] [INFO] User Luke created
+[2025-03-19 14:07:51] [INFO] User Luke reset their password
+[2025-03-19 14:32:19] [WARN] login.json had an error
+[2025-03-19 14:32:34] [WARN] login.json had an error
+[2025-03-19 14:32:41] [WARN] login.json had an error
+[2025-03-19 14:33:29] [WARN] login.json had an error
+[2025-03-19 14:34:02] [WARN] login.json had an error
+[2025-03-19 14:34:20] [WARN] login.json had an error
+[2025-03-19 14:34:32] [WARN] While reading login.json, an error occured. Defaulting to no users.
+[2025-03-19 14:34:32] [INFO] User Luke created
+[2025-03-19 14:34:32] [INFO] User Luke expenses file created
