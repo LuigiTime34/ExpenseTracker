@@ -38,7 +38,26 @@ def new_user(username, password, security_question, security_answer):
     
 def register():
     print("Register your account. Type 'back' to go back to login.")
-    username = input("Enter username: ")
+    
+    while True:
+        username = input("Enter username: ").strip()
+        if username.lower() == 'back':
+            return
+        
+        # Check if username exists
+        try:
+            with open(LOGIN_JSON_PATH, 'r') as f:
+                users = json.load(f)
+                if isinstance(users, dict):
+                    users = [users]
+        except (FileNotFoundError, json.JSONDecodeError):
+            users = []
+        
+        if any(user['username'] == username for user in users):
+            print('Username already exists! Please try a different username.')
+            continue
+        break
+    
     password = input("Enter password: ")
     security_question = input("Enter security question: ")
     security_answer = input("Enter security answer: ")
@@ -47,33 +66,49 @@ def register():
     
 def login():
     print("Login to your account. Type 'back' to go back to main menu.")
-    username = input("Enter username: ")
-    if username == 'back':
-                return False
-    password = input("Enter password: ")
-    if username == 'back':
-                return False, username
-    # Search in login.json for user, and see if password matches.
-    with open(LOGIN_JSON_PATH, 'r') as f:
-        users = json.load(f)
-        if isinstance(users, dict):
-            users = [users]
-    for user in users:
-        if user['username'] == username and user['password'] == password:
-            return True, username
-        else:
-            print("Username or password incorrect! Please try again.")
-            user_choice = input("Enter 'back' to go back to main menu, 'forgot' to reset your password, or 'retry' to try again: ")
+    
+    # Get username and check if it exists
+    while True:
+        username = input("Enter username: ").strip()
+        if username.lower() == 'back':
+            return False, None
+        
+        try:
+            with open(LOGIN_JSON_PATH, 'r') as f:
+                users = json.load(f)
+                if isinstance(users, dict):
+                    users = [users]
+        except (FileNotFoundError, json.JSONDecodeError):
+            print("Error accessing user database. Please try again later.")
+            return False, None
+            
+        if not any(user['username'] == username for user in users):
+            print("Username does not exist!")
+            user_choice = input("Enter 'back' to go back to main menu or any key to try again: ").lower()
             if user_choice == 'back':
-                return False, username
-            elif user_choice == 'forgot':
-                reset_password(username)
-                login()
-            elif user_choice == 'retry':
-                login()
-            else:
-                print("Invalid input! Please try again.")
-                login()
+                return False, None
+            continue
+        break
+    
+    # Handle password verification
+    while True:
+        password = input("Enter password: ")
+        if password.lower() == 'back':
+            return False, username
+            
+        for user in users:
+            if user['username'] == username:
+                if user['password'] == password:
+                    return True, username
+                else:
+                    print("Password incorrect!")
+                    user_choice = input("Enter 'back' for main menu, 'forgot' to reset password, or any key to retry: ").lower()
+                    if user_choice == 'back':
+                        return False, username
+                    elif user_choice == 'forgot':
+                        reset_password(username)
+                        return login()
+                    break
 
 def reset_password(username):
     # Ask the user to answer the security question, and see if they get it right. If they do, ask for a new password. If they don't, keep asking until they get it right.

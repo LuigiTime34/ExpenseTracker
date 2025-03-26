@@ -1,0 +1,26 @@
+[
+    {
+        "username": "Luke255",
+        "password": "1234567890",
+        "security_question": "hi",
+        "security_answer": "hi2"
+    },
+    {
+        "username": "admin",
+        "password": "Hinge1234567890",
+        "security_question": "What caused you to make this project?",
+        "security_answer": "ChatGPT"
+    },
+    {
+        "username": "elipeeli",
+        "password": "balls",
+        "security_question": "How many balls did Hitler have?",
+        "security_answer": "1"
+    },
+    {
+        "username": "jomama123",
+        "password": ":)",
+        "security_question": "raw milk or not raw milk?",
+        "security_answer": "raw milk"
+    }
+]

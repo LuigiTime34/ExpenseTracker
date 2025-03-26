@@ -1,0 +1,20 @@
+[
+    {
+        "category": "Food",
+        "amount": "200",
+        "description": "",
+        "timestamp": "2025-03-24 12:01:55"
+    },
+    {
+        "category": "Food",
+        "amount": "2000",
+        "description": "",
+        "timestamp": "2025-03-24 12:02:01"
+    },
+    {
+        "category": "Fun",
+        "amount": "20000",
+        "description": "Movie Tickets",
+        "timestamp": "2025-03-24 12:02:12"
+    }
+]
